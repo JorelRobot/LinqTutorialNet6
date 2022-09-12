@@ -12,7 +12,7 @@ namespace Exercises
         public static bool IsAnyNumberNegative(IEnumerable<int> numbers)
         {
             //TODO you code goes here
-            throw new NotImplementedException();
+            return numbers.Any(num => num < 0);
         }
 
         //Coding Exercise 2
@@ -21,7 +21,7 @@ namespace Exercises
         public static bool AreThereAnyBigCats(IEnumerable<Pet> pets)
         {
             //TODO you code goes here
-            throw new NotImplementedException();
+            return pets.Any(pet => pet.PetType == PetType.Cat && pet.Weight > 2f);
         }
 
         //Refactoring challenge
