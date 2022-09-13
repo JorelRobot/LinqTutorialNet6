@@ -29,7 +29,11 @@ namespace Exercises
         public static bool AreAllNamesValid_Refactored(string[] names)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return !names.Any(
+                name => char.IsLower(name[0]) ||
+                name.Length < 2 || 
+                name.Length > 25
+                );
         }
 
         //do not modify this method
