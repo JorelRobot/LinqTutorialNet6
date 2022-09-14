@@ -12,7 +12,7 @@ namespace Exercises
         public static bool AreAllNumbersDivisibleBy10(int[] numbers)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return numbers.All(num => num % 10 == 0);
         }
 
         //Coding Exercise 2
@@ -21,7 +21,7 @@ namespace Exercises
         public static bool AreAllPetsOfTheSameType(IEnumerable<Pet> pets)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return pets.All(pet => pet.PetType == pets.ToList()[0].PetType);
         }
 
         //Refactoring challenge
@@ -29,7 +29,7 @@ namespace Exercises
         public static bool AreAllWordsOfTheSameLength_Refactored(List<string> words)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return words.All(word => word.Length == words[0].Length);
         }
 
         //do not modify this method
