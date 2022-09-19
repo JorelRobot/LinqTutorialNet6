@@ -56,9 +56,8 @@ namespace Exercises
         public static int CountOfDogsOfTheOwnerWithMostDogs_Refactored(
             IEnumerable<Person> owners)
         {
-            var foo = owners.Max(owner => owner.Pets.Where(pet => pet.PetType == PetType.Dog));
             //TODO your code goes here
-            return 0;
+            return owners.Max(owner => owner.Pets.Where(pet => pet.PetType == PetType.Dog).Count());
         }
 
         //do not modify this method
