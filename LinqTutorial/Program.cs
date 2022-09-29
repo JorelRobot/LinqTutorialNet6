@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LinqTutorial.MethodSyntax;
 
 namespace LinqTutorial
@@ -48,6 +50,15 @@ namespace LinqTutorial
 
             //OTHERS
             //DotNet6Improvements.Run();
+
+
+            //List<string> words = new List<string>{ "1.AAA", "2.BBB", "invalidWord", "4.DDD" };
+            //List<string> words = new List<string> { "1.AAA", "2.BBB", "4.DDD" };
+            List<string> words = new List<string> { "0.AAA", "2.BBB", "invalidWord", "5.DDD" };
+
+            var outstr = string.Join(", ", words.Where((word, index) => char.IsNumber(word[0]) && Int32.Parse(word[0].ToString()) == index + 1));
+
+            Console.WriteLine(outstr);
 
             Console.ReadKey();
         }
