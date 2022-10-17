@@ -26,7 +26,15 @@ namespace Exercises
         public static IEnumerable<int> GetNumbers(IEnumerable<object> objects)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+
+            var numInts = objects.OfType<int>();
+            var numStrings = objects
+                .OfType<string>()
+                .Where(obj => obj.Any(c => char.IsDigit(c)));
+
+            return numInts
+                .Concat(numStrings.Select(s => Convert.ToInt32(s)))
+                .OrderBy(num => num);
         }
 
         //Coding Exercise 2
@@ -54,7 +62,26 @@ namespace Exercises
         public static IEnumerable<Person> PeopleFromString(string input)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            string [] peopleInFormat = input.Split(';');
+
+            return peopleInFormat
+                .Select(
+                    p => {
+                        if (p.Contains(',') && p.Contains('/'))
+                        {
+                            string[] data = p.Split(' ');
+                            Person person = new Person()
+                            {
+                                FirstName = data[0],
+                                LastName = new string(data[1].TakeWhile(c => c != ',').ToArray()),
+                                DateOfBirth = Convert.ToDateTime(data[2])
+                            };
+
+                            return person;
+                        }
+                        else return null;
+                    })
+                .Where(p => p != null);
         }
 
         //Refactoring challenge
@@ -62,6 +89,9 @@ namespace Exercises
         public static TimeSpan TotalDurationOfSongs_Refactored(string allSongsDuration)
         {
             //TODO your code goes here
+            
+
+
             throw new NotImplementedException();
         }
 

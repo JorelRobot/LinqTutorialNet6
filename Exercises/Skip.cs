@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercises
 {
@@ -23,7 +24,13 @@ namespace Exercises
         public static double CalculateAverageMark(Student student)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return student.Marks.Count() > 5 ?
+                student.Marks
+                    .OrderBy(mark => mark)
+                    .Skip(1)
+                    .SkipLast(1)
+                    .Average() :
+                0;
         }
 
         //Coding Exercise 2
@@ -51,7 +58,20 @@ namespace Exercises
         public static IEnumerable<string> GetWordsBetweenStartAndEnd(List<string> words)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+
+            var start = "START";
+            var end = "END";
+
+            var isValidCollection = words.Count(word => word.Equals(start)) == 1 &&
+                                    words.Count(word => word.Equals(end)) == 1 &&
+                                    words.IndexOf(start) < words.IndexOf(end);
+
+            return isValidCollection ? 
+                words
+                    .SkipWhile(word => !word.Equals("START"))
+                    .TakeWhile(word => !word.Equals("END"))
+                    .Skip(1)
+                : Enumerable.Empty<string>();
         }
 
         //Refactoring challenge
@@ -60,7 +80,7 @@ namespace Exercises
             IEnumerable<int> numbers)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return numbers.SkipWhile(number => number % 100 != 0);
         }
 
         //do not modify this method

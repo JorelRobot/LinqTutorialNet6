@@ -19,7 +19,7 @@ namespace Exercises
         public static bool AreAllUnique<T>(IEnumerable<T> collection)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return collection.SequenceEqual(collection.Distinct());
         }
 
         //Coding Exercise 2
@@ -45,7 +45,11 @@ namespace Exercises
             IEnumerable<IEnumerable<T>> collections)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+
+            return collections
+                .OrderBy(collection => Math.Abs(collection.Distinct().Count() - collection.Count()))
+                .ThenByDescending(collection => collection.Count())
+                .LastOrDefault();
         }
 
         //Refactoring challenge
@@ -54,7 +58,7 @@ namespace Exercises
             IEnumerable<string> words)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return words.Where(word => word.Count() < 5).Distinct();
         }
 
         //do not modify this method

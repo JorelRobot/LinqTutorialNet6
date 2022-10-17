@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LinqTutorial.MethodSyntax;
 
 namespace LinqTutorial
@@ -48,6 +50,19 @@ namespace LinqTutorial
 
             //OTHERS
             //DotNet6Improvements.Run();
+
+
+            //List<string> words = new List<string>{ "1.AAA", "2.BBB", "invalidWord", "4.DDD" };
+            //List<string> words = new List<string> { "1.AAA", "2.BBB", "4.DDD" };
+            List<string> words = new List<string> { "aaa", "END ", "ccc", "START" };
+
+            var outstr = words.Where(word => word.Equals("START") || word.Equals("END")).Count() == 2
+                ? words.SkipWhile(word => !word.Equals("START"))
+                       .TakeWhile(word => !word.Equals("END"))
+                       .Skip(1)
+                : words.Skip(words.Count());
+
+            Console.WriteLine(string.Join(", ", outstr));
 
             Console.ReadKey();
         }
