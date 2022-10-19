@@ -57,7 +57,9 @@ namespace Exercises
         public static double MaxAverageOfMarks(IEnumerable<Student> students)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return students.Any()
+                ? students.Max(student => student.Marks.Any() ? student.Marks.Average() : 0)
+                : 0;
         }
 
         //Refactoring challenge
@@ -66,7 +68,8 @@ namespace Exercises
             List<float?> heights, float defaultIfNull)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return heights == null || !heights.Any() ?
+                0 : heights.Average(height => height == null ? defaultIfNull : height.Value);
         }
 
         //do not modify this method
