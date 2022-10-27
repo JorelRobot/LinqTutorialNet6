@@ -39,7 +39,17 @@ namespace Exercises
              IEnumerable<House> houses)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return people.GroupJoin(
+                    houses,
+                    person => person.Id,
+                    house => house.OwnerId,
+                    (person, housesList) => new { Person = person, Houses = housesList.DefaultIfEmpty() })
+                .SelectMany(
+                    data => data.Houses,
+                    (data, house) => house != null ?
+                                       $"Person: (Id:{data.Person.Id}), {data.Person.Name} owns {house.Adderss}" :
+                                       $"Person: (Id:{data.Person.Id}), {data.Person.Name} owns no house"
+                );
         }
 
         //Coding Exercise 2
@@ -87,7 +97,18 @@ namespace Exercises
             IEnumerable<Order> orders)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return orders
+                .Join(
+                    customers,
+                    orderCustomer => orderCustomer.CustomerId,
+                    customer => customer.Id,
+                    (order, customer) => new { Order = order, Customer = customer }
+                ).Join(
+                    items,
+                    order => order.Order.ItemId,
+                    item => item.Id,
+                    (order, item) => $"Customer: {order.Customer.Name}, Item: {item.Name}, Count: {order.Order.Count}"
+                );
         }
 
         //Refactoring challenge
@@ -97,7 +118,16 @@ namespace Exercises
             IEnumerable<House> houses)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return houses
+                .Join(
+                    people,
+                    house => house.OwnerId,
+                    person => person.Id,
+                    (house, owner) => new { House = house, Owner = owner })
+                .ToDictionary(
+                    data => data.House,
+                    data => data.Owner
+                );
         }
 
         //do not modify this method
