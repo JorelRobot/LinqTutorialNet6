@@ -22,7 +22,10 @@ namespace Exercises
             IEnumerable<int> activityTimesInSeconds)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return activityTimesInSeconds
+                .Aggregate(
+                    new TimeSpan(0, 0, 0, 0),
+                    (totalTimeSoFar, nextTime) => totalTimeSoFar + TimeSpan.FromSeconds(nextTime));
         }
 
         //Coding Exercise 2
@@ -41,7 +44,15 @@ namespace Exercises
         public static string PrintAlphabet(int count)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return count < 1 || count > 26 ?
+                throw new ArgumentException() :
+                new string(Enumerable
+                    .Range(0, count)
+                    .Aggregate(
+                        "",
+                        (strSoFar, nextNumber) => strSoFar + "," + (char)(nextNumber + 97))
+                    .Skip(1)
+                    .ToArray());
         }
 
         //Refactoring challenge
@@ -49,7 +60,21 @@ namespace Exercises
         public static IEnumerable<int> Fibonacci_Refactored(int n)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            if (n < 1)
+            {
+                throw new ArgumentException(
+                    $"Can't generate Fibonacci sequence " +
+                    $"for {n} elements. N must be a " +
+                    $"positive number");
+            }
+
+            return n == 1 ? new[] { 0 } :
+                Enumerable.Range(1, n - 2)
+                    .Aggregate(
+                        new List<int> { 0, 1 } as IEnumerable<int>,
+                        (sequence, nextIndex) => sequence.Append(
+                            sequence.ElementAt(nextIndex - 1) +
+                            sequence.ElementAt(nextIndex)));
         }
 
         //do not modify this method
