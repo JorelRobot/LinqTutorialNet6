@@ -23,7 +23,8 @@ namespace Exercises
             GetAbsoluteValuesInfo(IEnumerable<int> numbers)
         {
             //  TODO your code goes here
-            throw new NotImplementedException();
+            return from number in numbers
+                   select $"|{number}|={Math.Abs(number)}";
         }
 
         //Coding Exercise 2
@@ -64,7 +65,9 @@ namespace Exercises
         public static IEnumerable<string> GetShortAddresses(IEnumerable<House> houses)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return from house in houses
+                   let containsComma = house.Address.Contains(",")
+                   select containsComma ? house.Address.Split(',')[1].TrimStart(' ') : house.Address;
         }
 
         //Refactoring Challenge
@@ -73,7 +76,16 @@ namespace Exercises
             IEnumerable<Student> students)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return (from student in students
+                    let maxMark = student.Marks.Any() ?
+                                  student.Marks.Max() :
+                                  0
+                    orderby maxMark descending
+                    select
+                        $"Best mark was earned by " +
+                        $"{student.Name}" +
+                        $" and it is {maxMark}")
+                    .FirstOrDefault();
         }
 
         //do not modify this method
