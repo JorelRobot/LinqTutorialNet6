@@ -26,7 +26,9 @@ namespace Exercises
                 IEnumerable<TimeSpan> timeSpans)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return from timeStamp in timeSpans
+                   orderby timeStamp descending
+                   select timeStamp;
         }
 
         //Coding Exercise 2
@@ -55,7 +57,9 @@ namespace Exercises
              IEnumerable<Point> points)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return from point in points
+                   orderby point.X , point.Y
+                   select point;
         }
 
         //Refactoring challenge
@@ -65,7 +69,9 @@ namespace Exercises
                 IEnumerable<DateTime> dates)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return from date in dates
+                   orderby date.DayOfWeek
+                   select date;
         }
 
         //do not modify this method
