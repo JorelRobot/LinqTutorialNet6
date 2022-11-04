@@ -21,7 +21,10 @@ namespace Exercises
         public static IEnumerable<string> GroupByFirstDigit(IEnumerable<int> numbers)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return from number in numbers
+                   group number by number.ToString().First()
+                   into grouping
+                   select $"FirstDigit: {grouping.Key}, numbers: {string.Join(",", from g in grouping select g)}";
         }
 
         //Coding Exercise 2
@@ -49,7 +52,10 @@ namespace Exercises
             IEnumerable<DateTime> dates)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return (from date in dates
+                    group date by date.DayOfWeek)
+                   .ToDictionary(grouping => grouping.Key, 
+                                 grouping => grouping.Max());
         }
 
         //Refactoring challenge
@@ -58,7 +64,13 @@ namespace Exercises
             IEnumerable<House> houses)
         {
             //TODO your code goes here
-            throw new NotImplementedException();
+            return from house in houses
+                   group house by house.OwnerId
+                   into grouping
+                   where grouping.Count() > 1
+                   select $"Owner with ID {grouping.Key} " +
+                            $"owns houses: " +
+                            $"{string.Join(", ", from g in grouping select g.Address)}";
         }
 
         //do not modify this method
